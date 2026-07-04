@@ -1,4 +1,10 @@
-# Demand smoke test — "Optimal" (optimizer habit tool)
+# Demand smoke test — "Optism" (optimizer habit tool)
+
+**LIVE: https://optism.netlify.app** (Netlify site `optism`, siteId 5db6e910-5e03-4428-8ef6-b23d6d6e4c44; Forms enabled, email capture verified end-to-end.)
+
+Brand note: "Optism" = optimism minus the first "im" — the 'tism wink lives in the name and a
+footer one-liner, deliberately NOT in the hero, so the test measures demand for the tool rather
+than reactions to the joke, and moderated channels don't bounce it.
 
 Fake-door landing page to test **demand + habit + soft willingness-to-pay** for the
 optimizer-habit positioning (chosen because round 1/2 showed answer quality isn't a moat —

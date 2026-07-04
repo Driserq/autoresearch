@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Optimal — settle every "which is cheaper?" in seconds</title>
+<title>Optism — settle every "which is cheaper?" in seconds</title>
 <meta name="description" content="For people who optimize everything. Ask any which-is-cheaper/better question, get a sourced verdict and the exact dollar difference in seconds." />
 <style>
   :root{ --ink:#14202b; --muted:#5b6b7a; --teal:#2a9d8f; --teal-d:#218175; --bg:#f7f9fa; --card:#fff; --line:#e6ebee; }
@@ -58,7 +58,7 @@
 </style>
 </head>
 <body>
-<header><div class="wrap"><div class="brand">Opti<span>mal</span></div></div></header>
+<header><div class="wrap"><div class="brand">Op<span>tism</span></div></div></header>
 
 <main class="wrap">
   <section class="hero">
@@ -118,7 +118,7 @@
   </section>
 </main>
 
-<footer class="wrap">Optimal · a concept we're validating · <span id="count-note">be one of the first to try it</span></footer>
+<footer class="wrap">Optism — it's optimism, minus the "im", plus the… you get it · a concept we're validating · <span id="count-note">be one of the first to try it</span></footer>
 
 <!-- survey modal -->
 <div class="modal" id="modal" role="dialog" aria-modal="true">
@@ -150,7 +150,7 @@ posthog.init('phc_wRUZrSRGkb3YGkkKgZiavhUAa8L25B8tkBgwARjAWqSs',{api_host:'https
 (function(){
   var ph = window.posthog;
   function cap(name, props){ try{ ph.capture(name, props||{}); }catch(e){} }
-  cap('optbot_landing_view', {positioning:'optimizer_habit'});
+  cap('optbot_landing_view', {positioning:'optimizer_habit', brand:'optism'});
 
   var planField = document.getElementById('plan-field');
   var emailInput = document.getElementById('email');
