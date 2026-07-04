@@ -35,5 +35,25 @@ Judge JSON → win-rate + deltas by tier. Keep-signal: treatment win-rate ≥ ~7
 and clearly higher on mid/high tiers. Kill-signal for *this framing*: edge concentrated
 only on trivial questions, or win-rate < 60%.
 
-## Results
-(filled after the run)
+## Results (2 blind judges × 9 questions = 18 verdicts)
+- **Treatment win-rate: 100% (18/18).** Both judges independently picked the research
+  workflow on every question — perfect inter-judge agreement.
+- **Mean rubric total: 24.4/25 (workflow) vs 14.5/25 (free-tool baseline); +9.9 (+40% of scale).**
+- **By tier the edge is ~uniform** (+10.3 trivial, +9.2 mid, +10.3 high) — this *falsified*
+  the "edge grows with stakes" hypothesis. The workflow wins everywhere by a similar margin.
+- **Where the edge comes from (mean, /5):** sourcing +4.5 (baseline ≈0), specificity +2.1,
+  actionability +1.6, correctness +1.2, honesty +0.7. → The baseline usually reaches the
+  *same verdict* and is fairly honest; the workflow wins on **live sourced numbers, explicit
+  math, and magnitude**, not on a different/better decision.
+
+### Interpretation
+- "Can we out-answer the free default?" — **Yes, decisively and robustly.** The incumbents
+  objection is defeated *against a no-tools single-shot answer*.
+- **Critical caveat:** the baseline is the free *default* (no browsing). The winning edge is
+  almost entirely "live citations + current numbers + math" — which is exactly what
+  browsing/research-mode incumbents (Perplexity, ChatGPT-with-search) also do. So the moat is
+  **execution + packaging for this use case, not a unique capability.**
+- **Next supply-side test:** raise the bar — workflow vs a Perplexity-style *browsing* answer,
+  to see if we beat the best free option, not just the default. Then run the demand/WTP smoke test.
+
+Artifacts: `blind_pairs.md` (dataset), `results.tsv` (scores), `readout.png` (chart), `analyze_eval.py`.
