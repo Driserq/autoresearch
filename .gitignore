@@ -36,6 +36,9 @@ scenario/
 # Node
 node_modules/
 
+# Netlify
+.netlify/
+
 # Environment
 .env
 .env.*

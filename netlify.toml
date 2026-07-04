@@ -1,0 +1,5 @@
+# Publishes only the optimizer-bot demand smoke-test landing page.
+# (This repo is the autoresearch toolkit; this config exists solely to deploy
+#  research/experiments/optimizer-bot/landing as a static fake-door test site.)
+[build]
+  publish = "research/experiments/optimizer-bot/landing"
