@@ -6,6 +6,11 @@ Thumbs.db
 __pycache__/
 *.pyc
 
+# Research environment (provisioned by research/bootstrap.sh)
+.venv/
+research/runs/
+.ipynb_checkpoints/
+
 # Claude Code local state
 .claude/agents/
 .claude/hooks/*

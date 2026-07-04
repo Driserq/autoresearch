@@ -1,0 +1,16 @@
+{
+  "$comment": "Repo-level Claude Code settings. The SessionStart hook provisions the research data stack on every fresh (ephemeral) web container. It is additive to the autoresearch plugin's own hooks and fails open (never blocks startup). See research/README.md.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/research/bootstrap.sh\"",
+            "timeout": 300
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+# Core data/experiment stack — installed into ./.venv by research/bootstrap.sh.
+# Kept lean so a fresh (ephemeral) web container provisions fast.
+duckdb>=1.1        # SQL over CSV/Parquet/JSON with no server — the experiment workhorse
+pandas>=2.2        # dataframes + the format analyze.py speaks
+numpy>=1.26
+pyarrow>=15        # Parquet/Arrow IO for duckdb <-> pandas
+polars>=1.0        # fast dataframes for larger-than-comfortable data
+matplotlib>=3.8    # plots (pairs with the dataviz skill)
+scipy>=1.11        # stats: significance tests when A/B-ing configs

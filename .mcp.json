@@ -1,0 +1,9 @@
+{
+  "$comment": "Project-scoped MCP servers for research. Context7 serves up-to-date, version-correct library docs (the repo's context7.json points at the matching Context7 space). Runs keyless out of the box; for private libraries or higher rate limits add \"--api-key\", \"${CONTEXT7_API_KEY}\" to args and set CONTEXT7_API_KEY (get a ctx7sk- key at https://context7.com/dashboard). Requires outbound network access to registry.npmjs.org and context7.com.",
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    }
+  }
+}

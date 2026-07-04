@@ -1,0 +1,7 @@
+# Heavier extras — NOT auto-installed (keeps SessionStart fast).
+# Pull in on demand:  uv pip install --python .venv/bin/python -r research/requirements-optional.txt
+jupyter            # execute .ipynb (the built-in NotebookEdit tool edits them without this)
+ipykernel
+seaborn            # statistical charts on top of matplotlib
+scikit-learn       # models / clustering for experiments
+statsmodels        # regression, time-series
