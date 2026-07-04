@@ -57,3 +57,28 @@ only on trivial questions, or win-rate < 60%.
   to see if we beat the best free option, not just the default. Then run the demand/WTP smoke test.
 
 Artifacts: `blind_pairs.md` (dataset), `results.tsv` (scores), `readout.png` (chart), `analyze_eval.py`.
+
+## Round 2 — vs a STRONG browsing baseline (Perplexity/ChatGPT-search proxy)
+Same 9 questions, same 2 blind judges. Treatment = round-1 workflow answers (reused);
+baseline = a top-tier browsing assistant (live research + citations), NOT coached into our
+methodology. Question: does our *structured comparison methodology* beat a strong generic
+research answer? Tie rule: |Δ| ≤ 1 point.
+
+- **Round 1 (vs no-tools default): 18/0/0 win/tie/loss, +9.9/25.**
+- **Round 2 (vs strong browsing): 8/9/1 win/tie/loss, +1.2/25.** The workflow still edges it
+  (never dominated, lost only once) but the margin collapses to noise.
+- **Where the edge went:** per-dimension advantage fell from sourcing +4.5 / specificity +2.1 /
+  actionability +1.6 (round 1) to sourcing **−0.2** / specificity +0.8 / actionability +0.5 (round 2).
+  **Round 1's win was almost entirely "the workflow cited sources and did the math; the default
+  didn't."** Give the baseline browsing and that advantage evaporates.
+- **Residual edge is narrow:** the workflow's remaining wins are on *structured high-stakes math*
+  (M2 steelmanned sensitivity, M3, H1, H3). It *lost* T1 (trivial) and H2 — where broad browsing
+  surfaced the **LG compressor class-action settlement** the workflow missed.
+
+### Verdict
+- vs the free **default**: we win decisively. vs the **best free tool**: it's ~a tie (parity-plus).
+- **The answer engine is largely commoditized.** A "better answers" thesis is not supported.
+  Any moat must come from distribution / UX-for-optimizers / trust / a vertical wedge — not raw
+  answer quality. This *de-risks over-building the AI* and shifts the burden to the demand test.
+
+Artifacts (round 2): `blind_pairs_v2.md`, `results_compare.tsv`, `readout_compare.png`, `analyze_compare.py`.
