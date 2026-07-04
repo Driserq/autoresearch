@@ -38,7 +38,8 @@ consults it automatically; you shouldn't have to hand-direct tool choice.
 | You want to… | Use |
 |---|---|
 | Run a loop against **another** repo | `add_repo` → `research/loop-on-repo.md` |
-| SQL over a CSV/Parquet/JSON with no server | `duckdb` (Python, in `.venv`) |
+| SQL over a local CSV/Parquet/JSON with no server | `duckdb` (Python, in `.venv`) |
+| SQL over a **remote** file / S3 URL | `duckdb` + `LOAD httpfs` (auto-staged; needs Full network) |
 | Dataframes / stats / significance test | `pandas`, `polars`, `scipy` (in `.venv`) |
 | Capture loop iterations as data | `research/lib/runlog.py` |
 | Convergence / plateau / cost-per-token / plot | `research/lib/analyze.py` |
@@ -77,6 +78,11 @@ python research/lib/analyze.py --experiment demo         # summary + research/ru
   fails open — it can never block startup. Heavier extras: `requirements-optional.txt`.
 - **`.mcp.json`** wires the Context7 MCP server (keyless by default; add
   `CONTEXT7_API_KEY` for private libs / higher limits).
+- **Remote DuckDB:** `bootstrap.sh` pre-stages the `httpfs` extension with `curl`
+  (DuckDB's own downloader trips on the security proxy). After that,
+  `LOAD httpfs` reads `https://…`/`s3://…` files directly. This needs **Full**
+  network access (or a **Custom** allowlist including `extensions.duckdb.org` plus
+  your data hosts); on **Trusted**/**None** it's skipped and local files still work.
 - **`lib/`** is stdlib-only on the write path, so you can log runs before the stack
   is installed; analysis needs the `.venv`.
 - `research/runs/` (raw logs + plots) and `.venv/` are git-ignored.
