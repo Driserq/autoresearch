@@ -24,6 +24,8 @@ the productivity press suggests.
 | The gap | Trackers don't intervene, interrupters don't learn — the catch → record → propose → test → keep/discard loop is unoccupied |
 | What kills it | Six failure modes ordered by severity, led by the compliance paradox and notification aversion |
 | Next | A three-week, no-code validation plan with explicit kill criteria |
+| Decided | ICP is founders/knowledge workers, and detection leads as the hook with the experiment loop underneath — plus what each choice settles |
+| Open | Two questions still outstanding: appetite for a barely-opened app, and whether this is nights-and-weekends or full-time |
 
 Published version: https://claude.ai/code/artifact/9bbc8c97-9de5-49bb-8b66-f83731119e6f
 

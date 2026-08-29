@@ -815,31 +815,46 @@ td.pick { background: var(--reg-wash); color: var(--ink); }
     </div>
   </section>
 
+  <!-- ============ DECIDED ============ -->
+  <section>
+    <div class="row">
+      <div class="label">Decided<span class="sub">Two answers, and what they settle</span></div>
+      <div class="col">
+        <h2>Founders and knowledge workers. Detection as the hook, the loop as the product.</h2>
+        <p class="lede">Both answers narrow the build more than they look like they should. The audience choice removes an entire framing problem, and the sequencing choice creates one specific trap worth designing around before you write anything.</p>
+
+        <h3>Choosing your own peer group settles four things</h3>
+        <ul class="plain">
+          <li><strong>Stop calling it mental health.</strong> This audience installs "stops you losing an afternoon" and does not install "emotional regulation coach", even when those are the same app. Frame it as output and leverage. That also walks you clear of the regulatory risk above without having to think about it — you can't drift into treatment claims if the copy was never about symptoms.</li>
+          <li><strong>App Store search is not your channel.</strong> Founder communities, X, HN, newsletters — and your own week-one episode diary is genuinely good content for exactly that audience. Building in public is the distribution, not a side activity.</li>
+          <li><strong>Price it like a tool, not a wellness subscription.</strong> $10–20/month is comfortable here, and a paywall filters out the free-tier tourists who make up much of that 3% day-30 statistic. Retention benchmarks for paid, self-selected, high-intent users look nothing like the category average.</li>
+          <li><strong>The market is small, so word of mouth has to be structural.</strong> High ARPU covers the size, but growth only works if the product emits something shareable — "here's what six weeks of episode data taught me about my afternoons" is both the retention payoff and the acquisition loop. Design that artifact deliberately; don't hope it emerges.</li>
+        </ul>
+        <p>One quirk to expect: this audience will try to optimize the app itself. You will get asked for data export, an API, an Obsidian or Notion sync, and raw event access within the first month. Lean into it — for this ICP that's a retention asset, and it costs almost nothing when inference is already on-device.</p>
+
+        <h3>The trap in leading with detection</h3>
+        <p>If "it knows when you're spiralling" is the hook, then the first notification carries the entire promise — and a first false positive doesn't cost you a notification, it costs the premise. That collides directly with the precision constraint: your rules will be crude at install time, because they have no data about this particular person yet.</p>
+        <p>The resolution is to make the first week <strong>silent by design, in the shipped product</strong>. The app observes and never fires. Then, at the end of the week: <em>"Six times this week you were indoors and immobile for 8+ hours before a long scroll session. Want me to start catching that?"</em></p>
+        <p>That inverts the problem. It turns a precision risk into a consent moment, it proves the detector is real before it can annoy anyone, it makes the first notification something the user explicitly asked for, and it means the hook is demonstrated with the user's own data instead of a claim on a landing page. It also buys a week of calibration for free. The experiment loop then reveals itself naturally at week two or three, when the first system fix gets proposed — by which point the user has already seen the app be right about them.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ QUESTIONS ============ -->
   <section>
     <div class="row">
-      <div class="label">Open<span class="sub">Answers that would change the above</span></div>
+      <div class="label">Open<span class="sub">Still unanswered</span></div>
       <div class="col">
-        <h2>Four things I'd want from you</h2>
-
-        <div class="q">
-          <div class="ask">Who is this for, specifically?</div>
-          <p>People like you — self-aware knowledge workers and founders looking for leverage — is a very different product, price and distribution channel from the ADHD market (where Tiimo and Lifestack already fight) or a general anxiety audience (where you inherit clinical scrutiny). This changes the copy, the pricing, and whether App Store search or founder-community distribution is the route.</p>
-        </div>
+        <h2>Two things still outstanding</h2>
 
         <div class="q">
           <div class="ask">Are you willing to build an app people barely open?</div>
-          <p>The retention data says the winning design is almost entirely notifications, widgets and watch taps, with a sparse app behind them. That's an uncomfortable thing to build and a hard thing to demo, and some founders won't do it. If you want a rich app people spend time in, say so now — it changes the whole shape.</p>
+          <p>The retention data says the winning design is almost entirely notifications, widgets and watch taps, with a sparse app behind them. That's uncomfortable to build and hard to demo, and it sits awkwardly with the shareable-artifact requirement above — the resolution is probably a weekly review surface that people <em>do</em> open, sitting on top of a daily experience they don't.</p>
         </div>
 
         <div class="q">
-          <div class="ask">Detection or experimentation — which is the story?</div>
-          <p>"It knows when you're spiralling" is a harder technical bet with a better demo. "It runs experiments on your life until it finds your fix" is more defensible, more differentiated, and needs the user to buy into structure. I'd pick the second and use the first as the hook, but it's your call and it determines where the engineering goes.</p>
-        </div>
-
-        <div class="q">
-          <div class="ask">What's the constraint — time, money, or your own conviction?</div>
-          <p>If this is a nights-and-weekends bet, the three-week plan above is the entire scope and you should not write an app until week four. If it's funded and full-time, week two runs with fifty people instead of ten and you parallelize the detector work. I've written the plan for the first case.</p>
+          <div class="ask">What's the constraint — time, money, or conviction?</div>
+          <p>If this is nights and weekends, the three-week plan above is the entire scope and you shouldn't write an app until week four. If it's funded and full-time, week two runs with fifty people instead of ten and the detector work parallelizes. The plan is currently written for the first case.</p>
         </div>
 
       </div>
