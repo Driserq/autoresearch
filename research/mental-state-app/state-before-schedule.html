@@ -1,0 +1,865 @@
+<title>State Before Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+:root {
+  --paper:      #EAEDEF;
+  --surface:    #F7F9FA;
+  --surface-2:  #E1E6E9;
+  --ink:        #151A1E;
+  --ink-soft:   #37424A;
+  --muted:      #5B676F;
+  --rule:       #CBD3D9;
+  --rule-soft:  #DBE1E5;
+  --regulated:  #0E6B62;
+  --reg-wash:   #DCE9E7;
+  --dys:        #A93A20;
+  --dys-wash:   #F0DFDA;
+  --shadow:     0 1px 2px rgba(21,26,30,.05), 0 6px 20px -12px rgba(21,26,30,.22);
+
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:     #101519;
+    --surface:   #181F24;
+    --surface-2: #212A31;
+    --ink:       #E4E9EC;
+    --ink-soft:  #C3CCD2;
+    --muted:     #8A97A0;
+    --rule:      #2A343C;
+    --rule-soft: #222B32;
+    --regulated: #4CC4B4;
+    --reg-wash:  #14312F;
+    --dys:       #EF7A5E;
+    --dys-wash:  #3A211A;
+    --shadow:    0 1px 2px rgba(0,0,0,.4), 0 6px 20px -12px rgba(0,0,0,.7);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper:     #101519;
+  --surface:   #181F24;
+  --surface-2: #212A31;
+  --ink:       #E4E9EC;
+  --ink-soft:  #C3CCD2;
+  --muted:     #8A97A0;
+  --rule:      #2A343C;
+  --rule-soft: #222B32;
+  --regulated: #4CC4B4;
+  --reg-wash:  #14312F;
+  --dys:       #EF7A5E;
+  --dys-wash:  #3A211A;
+  --shadow:    0 1px 2px rgba(0,0,0,.4), 0 6px 20px -12px rgba(0,0,0,.7);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16.5px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding: 56px 0 30px;
+  margin-bottom: 8px;
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.kicker .dot { color: var(--rule); }
+
+h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 4.3rem);
+  line-height: 1.02;
+  letter-spacing: -.018em;
+  margin: 20px 0 0;
+  text-wrap: balance;
+}
+
+.standfirst {
+  font-family: var(--display);
+  font-size: clamp(1.08rem, 2.2vw, 1.36rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 34em;
+  margin: 18px 0 0;
+  text-wrap: pretty;
+}
+
+/* ---------- section scaffold ---------- */
+
+section { border-top: 1px solid var(--rule-soft); }
+section:first-of-type { border-top: none; }
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px 40px;
+  padding: 44px 0 8px;
+}
+
+@media (min-width: 1000px) {
+  .row { grid-template-columns: 180px minmax(0, 1fr); }
+  .label { padding-top: .55rem; }
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--regulated);
+  align-self: start;
+}
+.label .sub {
+  display: block;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: .06em;
+  text-transform: none;
+  margin-top: 5px;
+  line-height: 1.45;
+}
+
+.col { max-width: 68ch; }
+
+h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.55rem, 3.4vw, 2.1rem);
+  line-height: 1.16;
+  letter-spacing: -.012em;
+  margin: 0 0 14px;
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -.005em;
+  margin: 30px 0 8px;
+}
+
+p { margin: 0 0 15px; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--regulated); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--regulated);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 600; color: var(--ink); }
+em { font-style: italic; }
+
+.lede {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+}
+
+ul.plain { margin: 0 0 15px; padding-left: 1.1em; }
+ul.plain li { margin-bottom: 7px; }
+ul.plain li::marker { color: var(--muted); }
+
+/* ---------- episode state strip ---------- */
+
+.episode {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 24px 0 20px;
+  max-width: 100%;
+}
+
+.stage {
+  background: var(--surface);
+  padding: 15px 16px 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stage .n {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--muted);
+}
+.stage .what {
+  font-family: var(--display);
+  font-size: 1.12rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.stage .note {
+  font-size: 13px;
+  line-height: 1.44;
+  color: var(--muted);
+}
+.stage.window { background: var(--reg-wash); }
+.stage.window .n { color: var(--regulated); }
+.stage.window .note { color: var(--ink-soft); }
+
+.figcap {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+/* ---------- comparison table ---------- */
+
+.tablewrap {
+  overflow-x: auto;
+  margin: 22px 0 8px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--surface);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 620px;
+  font-size: 14.5px;
+}
+
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
+
+thead th {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+thead th.pick { color: var(--regulated); }
+
+tbody th {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--muted);
+  width: 26%;
+  line-height: 1.5;
+}
+
+td.pick { background: var(--reg-wash); color: var(--ink); }
+
+/* ---------- evidence cards ---------- */
+
+.evidence {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0 8px;
+}
+
+.ev {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--regulated);
+  border-radius: 3px;
+  padding: 16px 18px 17px;
+  box-shadow: var(--shadow);
+}
+.ev.against { border-left-color: var(--dys); }
+
+.ev .tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--regulated);
+}
+.ev.against .tag { color: var(--dys); }
+
+.ev .claim {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  line-height: 1.28;
+  margin: 6px 0 8px;
+  text-wrap: balance;
+}
+.ev p { font-size: 14.7px; margin-bottom: 0; color: var(--ink-soft); }
+.ev .src {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 10px;
+  display: block;
+}
+
+/* ---------- verdict ---------- */
+
+.verdict {
+  background: var(--surface);
+  border: 1px solid var(--regulated);
+  border-radius: 3px;
+  padding: 26px 26px 24px;
+  margin: 20px 0 8px;
+  box-shadow: var(--shadow);
+}
+.verdict .tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--regulated);
+}
+.verdict .call {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 3vw, 1.72rem);
+  line-height: 1.24;
+  margin: 10px 0 14px;
+  text-wrap: balance;
+}
+.verdict p { color: var(--ink-soft); }
+
+/* ---------- risks ---------- */
+
+.risks { margin: 22px 0 8px; border-top: 1px solid var(--rule); }
+
+.risk {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px 18px;
+  padding: 15px 0 16px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+@media (min-width: 720px) {
+  .risk { grid-template-columns: 96px minmax(0, 1fr); align-items: start; }
+}
+
+.chip {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 8px 4px;
+  border-radius: 2px;
+  justify-self: start;
+  white-space: nowrap;
+  margin-top: 3px;
+}
+.chip.kills { background: var(--dys-wash); color: var(--dys); }
+.chip.caps  { background: var(--surface-2); color: var(--ink-soft); }
+
+.risk .name { font-weight: 600; }
+.risk p { font-size: 14.7px; color: var(--ink-soft); margin: 3px 0 0; }
+
+/* ---------- numbered plan (a real sequence) ---------- */
+
+.plan {
+  counter-reset: wk;
+  margin: 22px 0 8px;
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.week {
+  background: var(--surface);
+  padding: 20px 22px 22px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px 20px;
+  counter-increment: wk;
+}
+@media (min-width: 720px) {
+  .week { grid-template-columns: 108px minmax(0, 1fr); }
+}
+
+.week .num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--regulated);
+}
+.week .num::before { content: "Week " counter(wk); }
+
+.week .title {
+  font-family: var(--display);
+  font-size: 1.24rem;
+  line-height: 1.24;
+  margin-bottom: 5px;
+}
+.week p { font-size: 14.7px; color: var(--ink-soft); }
+.week .metric {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px dashed var(--rule);
+}
+.week .metric b { color: var(--ink-soft); font-weight: 600; }
+
+/* ---------- questions ---------- */
+
+.q {
+  border-top: 1px solid var(--rule-soft);
+  padding: 16px 0 17px;
+}
+.q:first-of-type { border-top: 1px solid var(--rule); }
+.q .ask {
+  font-family: var(--display);
+  font-size: 1.16rem;
+  line-height: 1.3;
+  margin-bottom: 5px;
+  text-wrap: balance;
+}
+.q p { font-size: 14.7px; color: var(--muted); margin: 0; }
+
+/* ---------- footer ---------- */
+
+.foot {
+  border-top: 1px solid var(--rule);
+  margin-top: 56px;
+  padding-top: 20px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.foot a { color: var(--muted); }
+.foot ol { padding-left: 1.4em; margin: 8px 0 0; }
+.foot li { margin-bottom: 3px; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span>Product research memo</span>
+      <span class="dot">/</span>
+      <span>29 Aug 2026</span>
+      <span class="dot">/</span>
+      <span>Two concepts, one recommendation</span>
+    </div>
+    <h1>State Before Schedule</h1>
+    <p class="standfirst">You described two apps, not one. The in-the-moment interrupt is the real product; energy-based planning is a crowded feature you can add later. Here is the evidence, the gap nobody has filled, and what would kill it.</p>
+  </header>
+
+  <!-- ============ THE EPISODE ============ -->
+  <section>
+    <div class="row">
+      <div class="label">The episode<span class="sub">Your own example, read as a state machine</span></div>
+      <div class="col">
+        <h2>Your example already contains the product spec</h2>
+        <p class="lede">Home all day → a short, sharp spike of stress → lying down → the brain scrambling for dopamine. That is not one event. It is four stages, and each one has a different intervention, a different detectability, and a different chance of working.</p>
+
+        <div class="episode">
+          <div class="stage">
+            <span class="n">01 · SETUP</span>
+            <span class="what">Home all day</span>
+            <span class="note">Slow, invisible, hours long. Cheap to detect. Nothing feels wrong yet, so nothing motivates action.</span>
+          </div>
+          <div class="stage">
+            <span class="n">02 · SPIKE</span>
+            <span class="what">Acute stress</span>
+            <span class="note">Short. Genuinely hard to detect without a wearable, and you are least receptive to a phone right now.</span>
+          </div>
+          <div class="stage window">
+            <span class="n">03 · WINDOW</span>
+            <span class="what">Withdrawal</span>
+            <span class="note">You lie down. Stress is fading, the crash hasn't started. Highly detectable, and you are still capable of standing up.</span>
+          </div>
+          <div class="stage">
+            <span class="n">04 · CRASH</span>
+            <span class="what">Dopamine scramble</span>
+            <span class="note">Obvious in the data, useless as a moment. Once the feed is open, an interruption reads as an attack.</span>
+          </div>
+        </div>
+        <p class="figcap">The whole business is stage 03. Trackers act at 01 (log your mood). Screen-time blockers act at 04 (you've already lost). The gap between them is a product.</p>
+
+        <p>Stage 03 is the window because it is the last moment where the fix is still cheap. Going outside or doing pushups — which is what you correctly identified — is <strong>behavioral activation</strong>: interrupting withdrawal with movement before the withdrawal turns into a reward-seeking loop. It costs almost nothing at 03 and feels impossible at 04.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE SPLIT ============ -->
+  <section>
+    <div class="row">
+      <div class="label">The split<span class="sub">Why these are two companies</span></div>
+      <div class="col">
+        <h2>The two ideas share a slogan, not a business</h2>
+        <p>"Your state is a variable you can manage" describes both concepts, which is why they feel like one idea. But they diverge on every axis that decides whether a product works: who buys it, what state they're in when they use it, what has to be true technically, and what makes them stay.</p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th class="pick">A · The interrupt</th>
+                <th>B · The energy planner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>What it does</th>
+                <td class="pick">Catches you in a bad state and gets you to do the physical thing that breaks it</td>
+                <td>Arranges your tasks around when you'll have capacity for them</td>
+              </tr>
+              <tr>
+                <th>Horizon</th>
+                <td class="pick">Seconds to minutes</td>
+                <td>Days to weeks</td>
+              </tr>
+              <tr>
+                <th>User's state at use</th>
+                <td class="pick">Dysregulated — low capacity, high need</td>
+                <td>Calm and planning — low urgency</td>
+              </tr>
+              <tr>
+                <th>Hardest problem</th>
+                <td class="pick">Knowing <em>when</em> without asking</td>
+                <td>Proving the energy model is real and not astrology</td>
+              </tr>
+              <tr>
+                <th>Competition</th>
+                <td class="pick">Ahead, How We Feel, Finch, one sec, ScreenZen — none of which close the loop</td>
+                <td>Lifestack (YC), Sunsama, Motion, Reclaim, Tiimo, Rise — well funded, entrenched</td>
+              </tr>
+              <tr>
+                <th>Evidence base</th>
+                <td class="pick">Strong and named: just-in-time adaptive interventions</td>
+                <td>Thin: chronotype effects are real but modest; ultradian claims are mostly folklore</td>
+              </tr>
+              <tr>
+                <th>Why they stay</th>
+                <td class="pick">It works in a moment they can feel</td>
+                <td>Switching cost of a calendar — but only after they've already committed</td>
+              </tr>
+              <tr>
+                <th>Hardware needed</th>
+                <td class="pick">Phone only, if designed correctly</td>
+                <td>Effectively requires a wearable</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EVIDENCE ============ -->
+  <section>
+    <div class="row">
+      <div class="label">Evidence<span class="sub">What the field already settled, for and against</span></div>
+      <div class="col">
+        <h2>Four things you don't have to find out the hard way</h2>
+
+        <div class="evidence">
+
+          <div class="ev">
+            <span class="tag">Supports A</span>
+            <div class="claim">The interrupt has an academic name and it works</div>
+            <p>What you're describing is a just-in-time adaptive intervention. Meta-analytic results show moderate to large effect sizes against waitlist controls <em>and</em> against non-adaptive versions of the same content — the timing itself carries effect, not just the advice. Active 2025–26 trials cover depression, anger, insomnia and chronic pain. You are not inventing a category; you are commercializing one the literature already validated.</p>
+            <span class="src">JMIR Mental Health · systematic reviews in PMC, 2025–26</span>
+          </div>
+
+          <div class="ev against">
+            <span class="tag">Constrains everything</span>
+            <div class="claim">Roughly 3% of mental-health app users are still there on day 30</div>
+            <p>Median 70% discontinuation inside 100 days; day-one retention of 20–30%, meaning most installs never open the app twice. The diagnosed causes are front-loaded effort with deferred value, and interventions that ignore context. This single number invalidates any design where the user has to remember to open the app. Value has to be pushed to them in the moment — notification, widget, watch tap, interstitial — or there is no product.</p>
+            <span class="src">Sahha churn analysis · Plotline retention benchmarks · PMC app-analytics review</span>
+          </div>
+
+          <div class="ev against">
+            <span class="tag">Kills the obvious approach</span>
+            <div class="claim">Passive sensing cannot tell you someone is ruminating</div>
+            <p>Digital phenotyping predicts <em>aggregate</em> depression and anxiety risk from GPS, accelerometer and screen state reasonably well over weeks. Predicting <em>momentary</em> affect is markedly weaker, personalization is unsolved, and there is no validated rumination detector in the 2025–26 literature. Known failure modes: wearables get removed, self-report burden kills compliance, and real-world data is full of holes. Do not build a mood classifier — it is the part most likely to consume a year and not work.</p>
+            <span class="src">ScienceDirect digital-phenotyping review, 2025 · Korean community cohort, n=455, 2026</span>
+          </div>
+
+          <div class="ev against">
+            <span class="tag">Against B</span>
+            <div class="claim">The energy planner is taken, gated, and quietly self-defeating</div>
+            <p>Lifestack came out of Y Combinator doing exactly this — reads Oura, WHOOP, Apple Watch and time-blocks around a computed energy score — and is at roughly 30k users, $7/month, no free tier. Its own reviewers report the two problems you'd inherit: the circadian model doesn't match many people's real patterns, and <strong>seeing a low energy score makes bad days worse</strong>. That labeling effect is a structural flaw in scoring a person's capacity and showing it to them, not a bug in their build.</p>
+            <span class="src">Lifestack reviews · saner.ai, Temporal, usecarly comparisons, 2026</span>
+          </div>
+
+        </div>
+
+        <h3>On "high-performing CEOs plan by energy, not time"</h3>
+        <p>Treat this as marketing copy rather than a finding. Circadian and chronotype effects on cognitive performance are real but modest and slow-moving. The 90-minute ultradian cycle is well evidenced <em>for sleep architecture</em> and much thinner for waking productivity; the honest version of the claim is just that sustained focus decays past 90–120 minutes and breaks help. That is true, and it is also already in every productivity app. It won't carry a company.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE MECHANISM ============ -->
+  <section>
+    <div class="row">
+      <div class="label">The mechanism<span class="sub">How to catch the moment without a model</span></div>
+      <div class="col">
+        <h2>Don't detect the emotion. Detect the posture.</h2>
+        <p class="lede">The reason state-regulation apps fall back on "how are you feeling?" is that inferring emotion from sensors is hard. But you don't need the emotion. You need the <em>behavioral posture</em> that precedes the crash — and your own episode is fully legible from signals a phone already has, with no machine learning at all.</p>
+
+        <ul class="plain">
+          <li><strong>Hours since you left home.</strong> A geofence and a clock. Free, exact.</li>
+          <li><strong>Hours since sustained movement.</strong> Step count from the motion coprocessor, already collected, no battery cost.</li>
+          <li><strong>Device flat and stationary after a period of use.</strong> That's "lying down" — accelerometer orientation plus stillness.</li>
+          <li><strong>Session shape.</strong> Rapid app-switching, or a short-form video session starting from a stationary posture, is stage 04 beginning. This is the last-chance trigger.</li>
+        </ul>
+
+        <p>These are rules, not predictions. They run on-device, need no wearable, no server, and no training data. And they encode the actual causal story in your example — you weren't sad, you were <em>immobile and indoors for nine hours</em>, which is a condition, not a mood.</p>
+
+        <h3>Optimize for precision, not recall</h3>
+        <p>The instinct is to catch every episode. That instinct will kill the app. A notification that fires when you are <em>not</em> spiralling is an interruption from a nagging app, and an interruption during a genuinely bad moment is an uninstall. Given a ~3% day-30 baseline, you cannot spend trust. Fire rarely, be right when you do, and cap it hard — one or two interrupts a day, ever, as a product constraint rather than a setting.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE GAP ============ -->
+  <section>
+    <div class="row">
+      <div class="label">The gap<span class="sub">Where the actual defensibility is</span></div>
+      <div class="col">
+        <h2>Nobody closes the loop, and you already named it</h2>
+        <p>The market splits cleanly into two halves that never meet. <strong>Trackers</strong> — Daylio, Bearable, How We Feel, Apple's own State of Mind — collect and then hand you a chart, which is a data graveyard. <strong>Interrupters</strong> — one sec, ScreenZen, breathing exercises — act in the moment but never learn anything about you. Neither side does the thing you said in passing, which is the most valuable sentence in your brief:</p>
+
+        <p class="lede"><em>"A system fix might be going outside first thing in the morning in my case."</em></p>
+
+        <p>That is the product. Episodes are not the deliverable; they're the raw data. The loop is:</p>
+
+        <ul class="plain">
+          <li><strong>Catch</strong> the episode at stage 03 and prompt one physically trivial action.</li>
+          <li><strong>Record</strong> what preceded it and whether the action broke the state.</li>
+          <li><strong>Propose</strong> a structural change once a pattern repeats — "walk before 10am on days you have no morning meeting."</li>
+          <li><strong>Test</strong> it as a two-week experiment against your own prior baseline.</li>
+          <li><strong>Keep or discard</strong> on the measured episode rate, then start the next one.</li>
+        </ul>
+
+        <p>That is n-of-1 experimentation, and no consumer app in this space runs it. It is also where retention actually comes from: people don't stay for breathing exercises, they stay for an accumulating model of themselves they can't get anywhere else, and which gets more valuable the longer they stay. The interrupt earns the install. The loop earns the subscription.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VERDICT ============ -->
+  <section>
+    <div class="row">
+      <div class="label">Verdict<span class="sub">If you build one thing</span></div>
+      <div class="col">
+        <div class="verdict">
+          <span class="tag">Recommendation</span>
+          <div class="call">Build the interrupt with the experiment loop on top. Energy planning is a feature you add in year two, not a wedge you enter on.</div>
+          <p>Concept A wins on every dimension that decides early-stage outcomes: the pain is acute and self-evident (you felt it today), the moment of need has genuinely high willingness to act, the outcome is measurable within a single session, the evidence base is real, and the competition is fragmented into halves that each solve only part of it. Concept B enters a market with a funded incumbent doing the identical thing, requires hardware most people don't own, and rests on a scientific claim that doesn't survive contact with the literature.</p>
+          <p>Concept B does eventually belong <em>inside</em> A — "you're depleted, don't schedule the hard conversation today" is a natural output once you have episode data. But it is a consequence of the interrupt working, not a way to get there.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RISKS ============ -->
+  <section>
+    <div class="row">
+      <div class="label">What kills it<span class="sub">Ordered by how fatal</span></div>
+      <div class="col">
+        <h2>Six failure modes, in order</h2>
+
+        <div class="risks">
+
+          <div class="risk">
+            <span class="chip kills">Fatal</span>
+            <div>
+              <span class="name">The compliance paradox</span>
+              <p>The person in the spiral is precisely the person least able to act on a prompt. Every intervention must be decidable in under ten seconds and completable in under ten minutes, with no configuration, no choosing between options, and no typing. If your first build asks the user to select a coping strategy from a list, it will fail for this reason and you will misdiagnose it as a marketing problem.</p>
+            </div>
+          </div>
+
+          <div class="risk">
+            <span class="chip kills">Fatal</span>
+            <div>
+              <span class="name">Notification aversion</span>
+              <p>You are asking permission to interrupt someone during their worst twenty minutes of the day. Get it wrong twice and the app is deleted, not muted. This is the direct consequence of the precision constraint above and the reason the trigger budget has to be a hard product limit.</p>
+            </div>
+          </div>
+
+          <div class="risk">
+            <span class="chip caps">Caps it</span>
+            <div>
+              <span class="name">Hardware gating</span>
+              <p>Anything requiring an Oura or WHOOP cuts your addressable market to single-digit percentages and inherits Lifestack's ceiling. Phone-only for v1, with the wearable as an accuracy upgrade rather than a prerequisite.</p>
+            </div>
+          </div>
+
+          <div class="risk">
+            <span class="chip caps">Caps it</span>
+            <div>
+              <span class="name">Regulatory drift</span>
+              <p>Stay in wellness positioning. The moment you claim to treat depression or anxiety you are arguing about software-as-a-medical-device with the FDA or under the EU MDR. "Helps you notice and interrupt unhelpful states" is a defensible claim; "reduces anxiety" is a regulated one.</p>
+            </div>
+          </div>
+
+          <div class="risk">
+            <span class="chip caps">Caps it</span>
+            <div>
+              <span class="name">The data is radioactive</span>
+              <p>Continuous location, motion and inferred emotional state is about the most sensitive combination a consumer app can hold. Keep inference on-device and never sync raw traces. This is cheaper than the alternative and doubles as the strongest thing you can put on the landing page.</p>
+            </div>
+          </div>
+
+          <div class="risk">
+            <span class="chip caps">Watch it</span>
+            <div>
+              <span class="name">You are n = 1</span>
+              <p>Your fix — movement and daylight — is behavioral activation, which does generalize better than most self-help. But "everyone has a different personal system fix" is an untested assumption, and it might turn out that 80% of people need the same three interventions, which would make the personalization engine expensive theatre. Week one below is designed to find that out.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLAN ============ -->
+  <section>
+    <div class="row">
+      <div class="label">Next<span class="sub">Three weeks, no code</span></div>
+      <div class="col">
+        <h2>Validate the two claims everything else depends on</h2>
+        <p>Everything above reduces to two falsifiable questions. Can the moment be caught from signals a phone already has? And does a prompted physical action at stage 03 actually break the state? If either is no, nothing downstream matters — so test them before writing an app.</p>
+
+        <div class="plan">
+
+          <div class="week">
+            <span class="num"></span>
+            <div>
+              <div class="title">Instrument yourself</div>
+              <p>Log every episode you have, in the moment, in a note: what preceded it, where you were, how long since you'd moved or gone outside, your physical posture, what your phone was doing, what you did about it, and whether it broke. Ten to fifteen episodes is enough. You are checking whether the posture proxies actually co-occur with your episodes — the hypothesis in the mechanism section — before you trust it.</p>
+              <div class="metric"><b>Kill criterion:</b> if fewer than half your episodes are preceded by a detectable posture signal, the phone-only approach is wrong and you need to rethink before spending anything.</div>
+            </div>
+          </div>
+
+          <div class="week">
+            <span class="num"></span>
+            <div>
+              <div class="title">Run it by hand for other people</div>
+              <p>Eight to twelve people, over text. They message one word when they notice the state; you reply with one specific physical instruction within two minutes. No app, no signup, no design. You are the detector and the coach. This tells you the compliance rate, whether the intervention breaks the state for people who aren't you, and — the real prize — whether their effective fixes are all the same or genuinely personal.</p>
+              <div class="metric"><b>Watch for:</b> compliance rate above ~40%, self-reported break rate, and how much the winning intervention varies between people.</div>
+            </div>
+          </div>
+
+          <div class="week">
+            <span class="num"></span>
+            <div>
+              <div class="title">Dry-run the detector, silently</div>
+              <p>Build the cheapest possible rules engine — an iOS Shortcut with automation triggers, or a bare app that only reads motion and location — that logs a timestamp whenever it thinks you're in the window. It never notifies, never intervenes. Then score its log against your week-one diary.</p>
+              <div class="metric"><b>The number that matters:</b> precision. Of the times it fired, how often were you actually in the window? Below ~60% and the notification budget is already spent on false alarms.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUESTIONS ============ -->
+  <section>
+    <div class="row">
+      <div class="label">Open<span class="sub">Answers that would change the above</span></div>
+      <div class="col">
+        <h2>Four things I'd want from you</h2>
+
+        <div class="q">
+          <div class="ask">Who is this for, specifically?</div>
+          <p>People like you — self-aware knowledge workers and founders looking for leverage — is a very different product, price and distribution channel from the ADHD market (where Tiimo and Lifestack already fight) or a general anxiety audience (where you inherit clinical scrutiny). This changes the copy, the pricing, and whether App Store search or founder-community distribution is the route.</p>
+        </div>
+
+        <div class="q">
+          <div class="ask">Are you willing to build an app people barely open?</div>
+          <p>The retention data says the winning design is almost entirely notifications, widgets and watch taps, with a sparse app behind them. That's an uncomfortable thing to build and a hard thing to demo, and some founders won't do it. If you want a rich app people spend time in, say so now — it changes the whole shape.</p>
+        </div>
+
+        <div class="q">
+          <div class="ask">Detection or experimentation — which is the story?</div>
+          <p>"It knows when you're spiralling" is a harder technical bet with a better demo. "It runs experiments on your life until it finds your fix" is more defensible, more differentiated, and needs the user to buy into structure. I'd pick the second and use the first as the hook, but it's your call and it determines where the engineering goes.</p>
+        </div>
+
+        <div class="q">
+          <div class="ask">What's the constraint — time, money, or your own conviction?</div>
+          <p>If this is a nights-and-weekends bet, the three-week plan above is the entire scope and you should not write an app until week four. If it's funded and full-time, week two runs with fifty people instead of ten and you parallelize the detector work. I've written the plan for the first case.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div>Sources</div>
+    <ol>
+      <li><a href="https://mental.jmir.org/2025/1/e74103">JMIR Mental Health — social-support JITAI, microrandomized trial (2025)</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11862764/">JITAIs to Promote Behavioral Health — systematic review protocol, PMC</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11811111/">Beyond the current state of JITAIs in mental health — qualitative systematic review</a></li>
+      <li><a href="https://sahha.ai/blog/health-app-churn-retention/">Sahha — why most health app users churn within 90 days</a></li>
+      <li><a href="https://www.plotline.so/blog/retention-rates-mobile-apps-by-industry">Plotline — retention rates for mobile apps by industry</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8844980/">Engagement and popularity in mental health apps — app analytics analysis, PMC</a></li>
+      <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0165178125001313">Smartphone digital phenotyping in mental health disorders — review (2025)</a></li>
+      <li><a href="https://www.sciencedirect.com/science/article/pii/S2214782926000333">Digital phenotyping for depression and anxiety detection, n=455 (2026)</a></li>
+      <li><a href="https://blog.saner.ai/lifestack-review/">Lifestack review — energy-based AI planner (2026)</a></li>
+      <li><a href="https://apps.apple.com/us/app/ahead-emotions-coach/id1570430177">Ahead — emotions coach, App Store</a></li>
+    </ol>
+  </footer>
+
+</div>
