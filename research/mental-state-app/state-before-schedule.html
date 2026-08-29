@@ -840,6 +840,83 @@ td.pick { background: var(--reg-wash); color: var(--ink); }
     </div>
   </section>
 
+  <!-- ============ CONCIERGE ============ -->
+  <section>
+    <div class="row">
+      <div class="label">Concierge<span class="sub">On surveying, workout and diet logging</span></div>
+      <div class="col">
+        <h2>The service you're thinking of sells a human, and that's the part that doesn't fit in an app</h2>
+        <p class="lede">Worth knowing where this idea comes from: "manage your energy, not your time" is not a general observation about CEOs, it's a specific product. Jim Loehr's Human Performance Institute and Tony Schwartz's Energy Project sold it to Fortune 500s from the early 2000s — the book is <em>The Power of Full Engagement</em> (2003), the HBR piece is 2007. The modern descendant is executive health and longevity concierge: roughly $10–25k a year for a comprehensive program, past $50k for one with 24/7 access and ongoing coaching.</p>
+
+        <p>So the premise is right — high performers do buy this, and they pay a great deal for it. But look at what the money buys. Not data collection; the labs and the wearables are the cheap part. It buys <strong>a human who knows you and whom you are accountable to</strong>, <strong>interpretation</strong> — someone who tells you what it means and what to do next — and <strong>status</strong>, where the price is part of the product. Those are the active ingredients. Packing the service into an app removes all three and keeps the part that was never the value. You don't get a cheap concierge; you get a dashboard.</p>
+
+        <h3>Three reasons the correlation engine specifically won't work</h3>
+
+        <p><strong>Food logging collapses on a known schedule.</strong> Consistent tracking falls from 68% to 21% inside twelve weeks. MyFitnessPal self-monitoring drops from 5.4 days a week to 1.4 between weeks four and twelve; an eight-week app-delivered intervention saw six days a week fall to two. The correlation engine needs <em>more</em> data the longer it runs, and the input quality collapses over exactly that window. Those two curves cross, and they cross early.</p>
+
+        <p><strong>The confounding runs backwards.</strong> On days you feel good you train and eat well. On days you feel wrecked you skip the gym and order something fried. So workouts and diet will correlate beautifully with energy — with the causal arrow pointing the wrong way. This is the signature error of the category, and more data makes it worse rather than better, because a larger sample makes a confounded estimate more confident, not more correct.</p>
+
+        <p><strong>The statistics don't hold at n=1 without deliberate design.</strong> Real n-of-1 inference needs repeated measurement, randomization, washout long enough to clear carryover, and control for period effects. A methodology review of n-of-1 trials in health psychology found fewer than 20% did any power analysis, and most ignored carryover, intraclass correlation and period effects — and those were researchers running designed studies. Passive mining over self-logged food, workouts and a daily energy score has none of those properties. It will produce confident, spurious findings. That is <em>worse</em> than finding nothing, because a wrong personalized insight is extremely sticky — people restructure their lives around it and never learn it was noise.</p>
+
+        <p>Quantified Self already ran this experiment as a movement. Exist.io, Gyroscope and Welltory all still exist and none of them got big. Persistent-but-small is the realistic outcome here, and for a startup that's the bad case, not the safe one.</p>
+
+        <h3>The version that does work: same-day effects only</h3>
+        <p>There is a real distinction hiding under your question, and it's the difference between the two things that look identical from outside. <strong>Correlation mining</strong> — log everything, hunt for relationships — does not work. <strong>n-of-1 experimentation</strong> — one hypothesis, a deliberate change, an adequate outcome measure — does. The second is the loop already recommended above; your instinct is right, it just needs one hard constraint to become tractable:</p>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Candidate experiment</th>
+                <th class="pick">Verdict</th>
+                <th>Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Walk outside before 10am</th>
+                <td class="pick">Tractable</td>
+                <td>Same-day effect, clean washout, randomizable by day, outcome visible by evening</td>
+              </tr>
+              <tr>
+                <th>Caffeine cutoff time</th>
+                <td class="pick">Tractable</td>
+                <td>Known pharmacokinetics, effect inside one day, easy to alternate</td>
+              </tr>
+              <tr>
+                <th>No phone in the first hour</th>
+                <td class="pick">Tractable</td>
+                <td>Fast, reversible, and measurable from data you already hold</td>
+              </tr>
+              <tr>
+                <th>Training before vs. after work</th>
+                <td class="pick">Borderline</td>
+                <td>Binary "moved before noon" comes free from HealthKit; training load and volume do not</td>
+              </tr>
+              <tr>
+                <th>Macros, meal composition, supplements</th>
+                <td>Not tractable</td>
+                <td>Slow and cumulative, no clean washout, heavily confounded, and the logging dies at week four</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="figcap">The rule that separates them: manipulable today, observable today, back to baseline tomorrow. Diet fails all three — and it's also the input with the worst compliance, which disqualifies it twice.</p>
+
+        <h3>Where the survey belongs</h3>
+        <p>A daily questionnaire is not free — self-report burden is one of the named compliance killers in this literature, and a form is the fastest way to reproduce the 3% retention number. But <em>one</em> question is a different object from a survey. Make it the outcome measure for the experiment currently running: one question, tied to one active hypothesis, for two weeks, then it changes when the experiment does. It has a visible purpose, the user can see why it's being asked, and it stops being a data-collection tax.</p>
+
+        <h3>What you got right</h3>
+        <p>You're correct that this deepens the relationship. You're just one step off on the mechanism. The concierge relationship deepens because someone <em>takes a position</em> and holds you to it — not because they hold more of your data. The software equivalent isn't more inputs, it's the app being willing to say: <em>"I think your afternoons are going wrong because of what happens before 10am. Let's test it. Here's what I need from you for two weeks."</em> That's a relationship with something opinionated, and it costs one data stream rather than five.</p>
+
+        <p>Practically: adding diet logging, workout logging, survey instruments and wearable integrations turns a phone-only app that works on install day into a platform competing with Function Health, Lifeforce, Whoop and Oura — companies with vastly more money, where the differentiating piece is the interpretation you'd be worst at initially. That's the scope explosion this project most needs to avoid.</p>
+
+        <p>Keep one thing from the research, though, because it's genuinely useful: that market pays $10–50k a year, which is extraordinary willingness to pay. If you ever want to go upmarket, the move is <em>not</em> a cheap app version of the concierge. It's software that lets one human coach serve five times the clients — sold to the providers, not their customers. Real business, different company, and worth remembering rather than acting on now.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ QUESTIONS ============ -->
   <section>
     <div class="row">
@@ -874,6 +951,12 @@ td.pick { background: var(--reg-wash); color: var(--ink); }
       <li><a href="https://www.sciencedirect.com/science/article/pii/S2214782926000333">Digital phenotyping for depression and anxiety detection, n=455 (2026)</a></li>
       <li><a href="https://blog.saner.ai/lifestack-review/">Lifestack review — energy-based AI planner (2026)</a></li>
       <li><a href="https://apps.apple.com/us/app/ahead-emotions-coach/id1570430177">Ahead — emotions coach, App Store</a></li>
+      <li><a href="https://hbr.org/2007/10/manage-your-energy-not-your-time">Schwartz &amp; McCarthy — "Manage Your Energy, Not Your Time", HBR (2007)</a></li>
+      <li><a href="https://worldlongevityclinics.com/news/executive-health-program-cost-2026-longevity-clinic-buyers-guide/">Executive health program cost guide (2026)</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/41329042/">Calorie-counting apps — decade-long scoping review, 2013–2024</a></li>
+      <li><a href="https://academic.oup.com/abm/article/52/9/731/4837296">N-of-1 randomized trials in health psychology — systematic review and methodology critique</a></li>
+      <li><a href="https://effectivehealthcare.ahrq.gov/products/n-1-trials/research-2014-1">AHRQ — statistical design considerations for n-of-1 trials</a></li>
+      <li><a href="https://www.natemeyvis.com/what-happened-to-quantified-self/">What happened to Quantified Self?</a></li>
     </ol>
   </footer>
 
