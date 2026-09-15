@@ -1,6 +1,6 @@
 ---
 name: whisper-transcribe
-description: "Install and run Whisper speech-to-text in this sandbox container, and transcribe audio/video files with it. Recommends faster-whisper (verified equal quality, ~2x faster, ~4x less disk, no download bug); documents openai-whisper as a fallback. Use when asked to install Whisper, set up speech-to-text here, or transcribe an audio/video file in this environment."
+description: "Install and run Whisper speech-to-text in this sandbox container, and transcribe audio/video files with it -- including from a URL (direct link, YouTube, or a DRM-streamed platform like Spotify that needs a legitimate alternate source found first) and long files (multi-hour, chunked and resumable so container reclaims or OOM don't lose progress). Recommends faster-whisper (verified equal quality, ~2x faster, ~4x less disk, no download bug); documents openai-whisper as a fallback. Use when asked to install Whisper, set up speech-to-text here, download-and-transcribe something from a link, or transcribe an audio/video file in this environment."
 ---
 
 # Whisper transcription in this container
@@ -20,6 +20,31 @@ part of the `autoresearch` product itself (don't add it to `claude-plugin/`,
 - **Disk is a fixed, limited allowance** (~30GB free observed at session
   start).
 - **root** is available, so `apt-get install` works directly.
+
+## Given a URL instead of a file, or a long (multi-hour) file
+
+Read `references/long-jobs-and-sourcing.md` before starting -- it covers
+two things this section alone doesn't fit: turning an arbitrary link (direct
+file, YouTube, or a DRM-streamed platform like Spotify) into a local audio
+file, and why a single big transcription job on a long file silently breaks
+here (container reclaim after ~45min idle kills detached background jobs;
+loading hours of audio into one `transcribe()` call can OOM) plus the
+resumable, chunked fix for it. Short version:
+
+- **URL, not a file**: try a direct download first (`curl` with retry, same
+  pattern as `fetch-model.sh` below); for YouTube use `yt-dlp` but expect
+  this container's IP to sometimes get bot-blocked with no easy fix; for
+  Spotify/other DRM streams, don't try to rip the stream -- search for the
+  same episode on an open platform (often YouTube) instead, or ask the user
+  to upload the file themselves.
+- **Long file** (rough guide: more than ~15-20 minutes, or anything you'd
+  hesitate to run in one shot): use `scripts/chunked_transcribe.py` instead
+  of calling `transcribe.py` directly -- it splits, transcribes chunk by
+  chunk with the model loaded once, and checkpoints after every chunk so
+  it's safe to re-run if interrupted.
+- **Finding chapter/track boundaries** in one continuous recording, and
+  **working around `SendUserFile`'s 30MB cap** on the resulting audio/text:
+  also covered there, with `scripts/find_pause_boundaries.py` for the former.
 
 ## Recommendation: use faster-whisper, not openai-whisper
 
